@@ -47,13 +47,6 @@
   }
 
   /* Top bar */
-  .topbar{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding: 8px 10px;
-    flex-shrink:0;
-  }
   .team-name{
     flex:1;
     min-width:0;
@@ -67,20 +60,29 @@
     padding:2px 0;
   }
   .team-name:focus{ outline:none; border-bottom-color: var(--sky); }
+  .topbar{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding: 8px 8px;
+    flex-shrink:0;
+  }
   .bar-btn{
     background: var(--panel);
     border: 1px solid var(--line);
     color: var(--chalk);
-    padding: 7px 10px;
+    padding: 6px 8px;
     border-radius: 9px;
     font-family:'Rajdhani', sans-serif;
     font-weight:600;
-    font-size: 12px;
+    font-size: 11px;
     white-space:nowrap;
     flex-shrink:0;
   }
   .bar-btn:active{ background:#1a3a63; }
   .bar-btn.danger{ color: var(--danger); border-color: rgba(225,82,82,0.4); }
+  .bar-btn.primary{ background: var(--sky); color: var(--navy-deep); border-color: var(--sky); font-weight:700; }
+  .bar-btn.primary:active{ background:#3a8fc9; }
 
   .scroll-hint{
     display:flex;
@@ -298,6 +300,83 @@
   .totals-table th{ color:var(--sky); font-size:9.5px; letter-spacing:0.4px; text-transform:uppercase; position:sticky; top:0; background:var(--navy-deep); }
   .totals-table td:first-child, .totals-table th:first-child{ text-align:left; padding-left:6px; }
   .totals-table tr.hi td{ color:var(--yellow); font-weight:700; }
+
+  /* Export modal */
+  .modal-overlay{
+    position:fixed;
+    inset:0;
+    background: rgba(4,12,26,0.85);
+    z-index:45;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding: 16px;
+  }
+  .modal-overlay.show{ display:flex; }
+  .modal-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+    width: 100%;
+    max-width: 360px;
+  }
+  .modal-card h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:16px;
+    color: var(--yellow);
+    margin: 0 0 14px;
+  }
+  .field-group{ margin-bottom: 14px; }
+  .field-group label{
+    display:block;
+    font-size:10.5px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color: var(--chalk-dim);
+    font-weight:700;
+    margin-bottom: 6px;
+  }
+  .field-group input[type="text"]{
+    width:100%;
+    background: var(--navy-deep);
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    color: var(--chalk);
+    font-family:'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight:600;
+    padding: 10px 11px;
+  }
+  .field-group input[type="text"]:focus{ outline:none; border-color: var(--sky); }
+  .char-count{ font-size:9.5px; color: var(--chalk-dim); text-align:right; margin-top:3px; }
+
+  .radio-pills{ display:flex; gap:8px; }
+  .radio-pills label{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding: 10px 0;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--navy-deep);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 13px;
+    color: var(--chalk-dim);
+  }
+  .radio-pills input{ display:none; }
+  .radio-pills label.win-pill.selected{ background: rgba(95,208,122,0.18); border-color:#5FD07A; color:#5FD07A; }
+  .radio-pills label.loss-pill.selected{ background: rgba(225,82,82,0.18); border-color: var(--danger); color: var(--danger); }
+
+  .modal-actions{
+    display:flex;
+    gap:10px;
+    margin-top: 6px;
+  }
+  .modal-actions .bar-btn{ flex:1; padding:11px 8px; font-size:13px; text-align:center; }
 </style>
 </head>
 <body>
@@ -307,6 +386,7 @@
     <button class="bar-btn" id="copyBtn">Copy</button>
     <button class="bar-btn danger" id="resetBtn">Reset</button>
     <button class="bar-btn" id="tokenBtn" title="Update sync access token">🔑</button>
+    <button class="bar-btn primary" id="exportBtn">Export</button>
   </div>
   <div class="scroll-hint">
     <span id="syncDot" class="sync-dot"></span><span id="syncLabel">Connecting…</span>
@@ -324,6 +404,36 @@
     </div>
     <div class="totals-scroll">
       <table class="totals-table" id="totalsTable"></table>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="exportOverlay">
+    <div class="modal-card">
+      <h2>Export Game</h2>
+      <div class="field-group">
+        <label>Result</label>
+        <div class="radio-pills">
+          <label class="win-pill" id="winPillLabel">
+            <input type="radio" name="gameResult" value="WIN" id="winRadio"> WIN
+          </label>
+          <label class="loss-pill" id="lossPillLabel">
+            <input type="radio" name="gameResult" value="LOSS" id="lossRadio"> LOSS
+          </label>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Final Score (Us – Them)</label>
+        <input type="text" id="finalScoreInput" placeholder="e.g. 78-65" />
+      </div>
+      <div class="field-group">
+        <label>Team Name</label>
+        <input type="text" id="exportTeamName" maxlength="20" />
+        <div class="char-count"><span id="teamNameCharCount">0</span>/20</div>
+      </div>
+      <div class="modal-actions">
+        <button class="bar-btn" id="cancelExport">Cancel</button>
+        <button class="bar-btn primary" id="submitExport">Send Recap</button>
+      </div>
     </div>
   </div>
 
@@ -615,9 +725,10 @@
     });
   }
 
-  function buildBoxScoreText(){
+  function buildBoxScoreText(teamNameOverride){
+    const teamName = teamNameOverride || state.teamName;
     const lines = [];
-    lines.push(state.teamName + ' — Box Score');
+    lines.push(teamName + ' — Box Score');
     lines.push('#  NAME            PTS 2FA 2FM 3FA 3FM FTA FTM  TO REB AST STL');
     state.players.forEach(p=>{
       const s = p.stats;
@@ -659,6 +770,71 @@
     document.body.removeChild(ta);
   }
   document.getElementById('copyBtn').addEventListener('click', ()=> copyToClipboard(buildBoxScoreText()));
+
+  // ---- Export Game modal ----
+  const exportOverlay = document.getElementById('exportOverlay');
+  const winRadio = document.getElementById('winRadio');
+  const lossRadio = document.getElementById('lossRadio');
+  const winPillLabel = document.getElementById('winPillLabel');
+  const lossPillLabel = document.getElementById('lossPillLabel');
+  const finalScoreInput = document.getElementById('finalScoreInput');
+  const exportTeamNameInput = document.getElementById('exportTeamName');
+  const teamNameCharCount = document.getElementById('teamNameCharCount');
+
+  function updatePillStyles(){
+    winPillLabel.classList.toggle('selected', winRadio.checked);
+    lossPillLabel.classList.toggle('selected', lossRadio.checked);
+  }
+  winRadio.addEventListener('change', updatePillStyles);
+  lossRadio.addEventListener('change', updatePillStyles);
+  winPillLabel.addEventListener('click', ()=>{ winRadio.checked = true; updatePillStyles(); });
+  lossPillLabel.addEventListener('click', ()=>{ lossRadio.checked = true; updatePillStyles(); });
+
+  exportTeamNameInput.addEventListener('input', ()=>{
+    teamNameCharCount.textContent = exportTeamNameInput.value.length;
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    winRadio.checked = false;
+    lossRadio.checked = false;
+    updatePillStyles();
+    finalScoreInput.value = '';
+    exportTeamNameInput.value = state.teamName.slice(0, 20);
+    teamNameCharCount.textContent = exportTeamNameInput.value.length;
+    exportOverlay.classList.add('show');
+  });
+  document.getElementById('cancelExport').addEventListener('click', ()=>{
+    exportOverlay.classList.remove('show');
+  });
+
+  function buildRecapEmail(result, score, teamName){
+    const dateStr = new Date().toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+    const subject = `${teamName} Game Recap — ${result} (${score})`;
+    const header =
+      `GAME RECAP\n` +
+      `Team: ${teamName}\n` +
+      `Result: ${result}\n` +
+      `Final Score: ${score}\n` +
+      `Date: ${dateStr}\n\n`;
+    const body = header + buildBoxScoreText(teamName);
+    return { subject, body };
+  }
+
+  document.getElementById('submitExport').addEventListener('click', ()=>{
+    const result = winRadio.checked ? 'WIN' : (lossRadio.checked ? 'LOSS' : '');
+    const score = finalScoreInput.value.trim();
+    const teamName = exportTeamNameInput.value.trim();
+
+    if(!result){ showToast('Select WIN or LOSS'); return; }
+    if(!score){ showToast('Enter the final score'); return; }
+    if(!teamName){ showToast('Enter a team name'); return; }
+
+    const { subject, body } = buildRecapEmail(result, score, teamName);
+    const mailtoUrl = `mailto:basketballsims@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
+    exportOverlay.classList.remove('show');
+    showToast('Opening Mail app…');
+  });
 
   document.getElementById('tokenBtn').addEventListener('click', ()=>{
     clearToken();
