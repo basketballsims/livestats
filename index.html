@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Courtside — Live Box Score (Synced)</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD+UlEQVR4nO3dQU4bQRBG4SFiEYkTZMM5OEyOx924AsssRrJGkAc2dnf91X7fMijEXXnUGIsxD0/PL5v0P7+qH4ByGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIPVY/gDJvr+8f/uTP39/00eOH7se9xPE5hSv/+j3ksngcVzZxzmdeuJIF4xgXxLf/3GKhLBXH5CzoASyTyCJxlGdxtEwi7eOIyuJogUQaxxGbxVHrRFrG0SKLo6aJNIujXRZH7RLp9PJ56zJOGp2iTRyNZvqtLmdpcFnpMsqLtLjEpG+OJcs4CT9ddBzhs7uJ5DPmxpE8tduKPWloHLHzGiTzvIlxZE5qtMBTx8UROKNp0s6eFUfadOaLmkBQHFFzKZQzh5Q4ciaSIGQaEXGEzCJKwkwi4lCm+jgSvkQylU+mOI7y84ernU9lHJZxjsIp1V9WFKssDtfG+apm5eYQqonDtXGpkom5OYQK4nBt/Mz8ubk5hGbH4dq4xuTpuTmEpsbh2rjezBm6ORobHcrYO95cFSMcp/r2+j7utjk3h5BxCA2Mw2vKHOPm7OYQMg4h4xAaFYdPOGYaNG03h5BxCBmHkHEIGYfQkDj8VmW+ETN3cwgZh5BxCBmHkHEIPTw9v1Q/BoVycwgZh5BxCA25NaHpK6THn/HveISb36Pg5hAyDiHjEDIOoSFxhP/SwyWNmLmbQ8g4hIxDyDiEjENoVBx+wzLToGm7OYSMQ8g4hAbG4dOOOXw3QRUwDqGxb1L7YeN1/PGqQKepDn2H2s3N0droZ3VT4/Ap6vVmztDNITQ7DpfHNSZPz80hVBCHy+Nn5s/NzSFUE4fL41IlE3NzCJXF4fI4X9Ws3BxClXG4PM5ROKXizWEfX6udT/1lxT5I+WTq41CsiDjKv0QCJcwkIo4tYxY5QqaREscWM5FyOXMIimNLmkuVqAlkxbGFTWeytLPHxbHlzWiOwFMnxrFFTmqozPOGxrGlzmuE2JPmxrEFT+2Gks8YHceWPbvrhZ9u7B1vN7FPcLG75cKz2KVvjpMW0zxTl7O0iWPrM9OvNTpFg8vKUetLTKMsds3i2LVLpF0Wu5Zx7Fok0jSLXeM4drGJtM5i1z6OXVQiC2SxWySOXXkiy2SxWyqO3eTf47dYEEcLxnF0fPusQZ95YYvHcfL5//KiXO4hhc/8XfZCnV4+12TGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiH0D6S6BEvFZYTqAAAAAElFTkSuQmCC">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD+UlEQVR4nO3dQU4bQRBG4SFiEYkTZMM5OEyOx924AsssRrJGkAc2dnf91X7fMijEXXnUGIsxD0/PL5v0P7+qH4ByGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIPVY/gDJvr+8f/uTP39/00eOH7se9xPE5hSv/+j3ksngcVzZxzmdeuJIF4xgXxLf/3GKhLBXH5CzoASyTyCJxlGdxtEwi7eOIyuJogUQaxxGbxVHrRFrG0SKLo6aJNIujXRZH7RLp9PJ56zJOGp2iTRyNZvqtLmdpcFnpMsqLtLjEpG+OJcs4CT9ddBzhs7uJ5DPmxpE8tduKPWloHLHzGiTzvIlxZE5qtMBTx8UROKNp0s6eFUfadOaLmkBQHFFzKZQzh5Q4ciaSIGQaEXGEzCJKwkwi4lCm+jgSvkQylU+mOI7y84ernU9lHJZxjsIp1V9WFKssDtfG+apm5eYQqonDtXGpkom5OYQK4nBt/Mz8ubk5hGbH4dq4xuTpuTmEpsbh2rjezBm6ORobHcrYO95cFSMcp/r2+j7utjk3h5BxCA2Mw2vKHOPm7OYQMg4h4xAaFYdPOGYaNG03h5BxCBmHkHEIGYfQkDj8VmW+ETN3cwgZh5BxCBmHkHEIPTw9v1Q/BoVycwgZh5BxCA25NaHpK6THn/HveISb36Pg5hAyDiHjEDIOoSFxhP/SwyWNmLmbQ8g4hIxDyDiEjENoVBx+wzLToGm7OYSMQ8g4hAbG4dOOOXw3QRUwDqGxb1L7YeN1/PGqQKepDn2H2s3N0droZ3VT4/Ap6vVmztDNITQ7DpfHNSZPz80hVBCHy+Nn5s/NzSFUE4fL41IlE3NzCJXF4fI4X9Ws3BxClXG4PM5ROKXizWEfX6udT/1lxT5I+WTq41CsiDjKv0QCJcwkIo4tYxY5QqaREscWM5FyOXMIimNLmkuVqAlkxbGFTWeytLPHxbHlzWiOwFMnxrFFTmqozPOGxrGlzmuE2JPmxrEFT+2Gks8YHceWPbvrhZ9u7B1vN7FPcLG75cKz2KVvjpMW0zxTl7O0iWPrM9OvNTpFg8vKUetLTKMsds3i2LVLpF0Wu5Zx7Fok0jSLXeM4drGJtM5i1z6OXVQiC2SxWySOXXkiy2SxWyqO3eTf47dYEEcLxnF0fPusQZ95YYvHcfL5//KiXO4hhc/8XfZCnV4+12TGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiH0D6S6BEvFZYTqAAAAAElFTkSuQmCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Stat Tracker">
+<meta name="theme-color" content="#0B1E38">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0B1E38;
+    --navy-deep: #071527;
+    --panel: #122A4B;
+    --row-a: #0e2242;
+    --row-b: #0a1c38;
+    --sky: #4FA8E0;
+    --yellow: #F2C230;
+    --chalk: #F4F1E8;
+    --chalk-dim: #9FB3CC;
+    --line: rgba(255,255,255,0.09);
+    --danger: #E15252;
+    --tint-2pt: rgba(79,168,224,0.10);
+    --tint-3pt: rgba(242,194,48,0.10);
+    --tint-ft: rgba(255,255,255,0.05);
+    --tint-to: rgba(225,82,82,0.15);
+    --tint-hustle: rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background: radial-gradient(1200px 800px at 50% -10%, #12305a 0%, var(--navy) 45%, var(--navy-deep) 100%);
+    color:var(--chalk);
+    font-family:'Rajdhani', system-ui, sans-serif;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overflow:hidden;
+  }
+
+  /* Top bar */
+  .topbar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding: 8px 10px;
+    flex-shrink:0;
+  }
+  .team-name{
+    flex:1;
+    min-width:0;
+    background:transparent;
+    border:none;
+    border-bottom:1px dashed transparent;
+    color: var(--chalk);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 16px;
+    padding:2px 0;
+  }
+  .team-name:focus{ outline:none; border-bottom-color: var(--sky); }
+  .bar-btn{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--chalk);
+    padding: 7px 10px;
+    border-radius: 9px;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size: 12px;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .bar-btn:active{ background:#1a3a63; }
+  .bar-btn.danger{ color: var(--danger); border-color: rgba(225,82,82,0.4); }
+
+  .scroll-hint{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    padding: 0 10px 6px;
+    font-size: 10px;
+    color: var(--chalk-dim);
+    letter-spacing:0.3px;
+    flex-shrink:0;
+  }
+  .scroll-hint b{ color: var(--sky); }
+  .sync-dot{
+    width:7px; height:7px;
+    border-radius:50%;
+    background: var(--chalk-dim);
+    flex-shrink:0;
+    transition: background 0.2s ease;
+  }
+  .sync-dot.ok{ background:#5FD07A; }
+  .sync-dot.busy{ background: var(--yellow); }
+  .sync-dot.err{ background: var(--danger); }
+
+  /* List */
+  .list-wrap{
+    flex:1;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 10px 10px;
+  }
+
+  .stats-scroll{
+    display:flex;
+    align-items:stretch;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .stats-scroll::-webkit-scrollbar{ display:none; }
+
+  /* Player block */
+  .player-block{
+    border: 1px solid var(--line);
+    border-top:none;
+  }
+  .player-block:first-child{ border-top:1px solid var(--line); border-radius:10px 10px 0 0; overflow:hidden; }
+  .player-block:last-child{ border-radius: 0 0 10px 10px; overflow:hidden; }
+
+  /* Name row: number + name + sticky live PTS, never scrolls */
+  .name-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .jersey-badge{
+    background: var(--yellow);
+    color: var(--navy-deep);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 12px;
+    border-radius: 6px;
+    width:26px; height:22px;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .jersey-badge input{
+    width:100%; height:100%;
+    background:transparent; border:none;
+    text-align:center; font:inherit; color:inherit; padding:0;
+  }
+  .jersey-badge input:focus{ outline:none; }
+  .name-input{
+    flex:1;
+    min-width:0;
+    background:transparent;
+    border:none;
+    border-bottom: 1px dashed transparent;
+    color: var(--chalk);
+    font-family:'Rajdhani', sans-serif;
+    font-weight:600;
+    font-size: 14.5px;
+    padding:2px 0;
+  }
+  .name-input:focus{ outline:none; border-bottom-color: var(--sky); }
+  .pts-tag{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    flex-shrink:0;
+    background: rgba(242,194,48,0.12);
+    border: 1px solid rgba(242,194,48,0.35);
+    border-radius: 8px;
+    padding: 3px 9px;
+  }
+  .pts-num{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 18px;
+    color: var(--yellow);
+    font-variant-numeric: tabular-nums;
+    line-height:1;
+  }
+  .pts-label{
+    font-size:9px;
+    letter-spacing:1px;
+    color: var(--chalk-dim);
+    text-transform:uppercase;
+  }
+
+  /* Stat cell: label above, stepper below */
+  .stat-cell{
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    gap:4px;
+    padding: 6px 4px 8px;
+    border-right: 1px solid var(--line);
+  }
+  .stat-cell:last-child{ border-right:none; }
+  .row-a{ background: var(--row-a); }
+  .row-b{ background: var(--row-b); }
+
+  .cell-label{
+    font-size: 9.5px;
+    font-weight:700;
+    letter-spacing:0.4px;
+    color: var(--sky);
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .cell-label.to-label{ color:#ff9a9a; }
+
+  .stepper{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .stepper button{
+    border:none;
+    border-radius:7px;
+    color:#fff;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    padding:0;
+  }
+  .stepper .val{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    color: var(--chalk);
+    font-variant-numeric: tabular-nums;
+    text-align:center;
+    flex-shrink:0;
+  }
+  .stepper button.minus{ background: rgba(225,82,82,0.9); margin-right:4px; }
+  .stepper button.plus{ background: var(--sky); color: var(--navy-deep); margin-left:4px; }
+  .stepper button:active{ transform: scale(0.9); }
+
+  .tier1 .stepper button{ width:27px; height:30px; font-size:15px; }
+  .tier1 .stepper .val{ font-size:16px; min-width: 20px; }
+  .tier2 .stepper button{ width:25px; height:28px; font-size:14px; }
+  .tier2 .stepper .val{ font-size:15px; min-width: 18px; }
+  .tier3 .stepper button{ width:23px; height:26px; font-size:13px; }
+  .tier3 .stepper .val{ font-size:14px; min-width: 16px; }
+
+  .toast{
+    position:fixed;
+    bottom: 14px;
+    left:50%;
+    transform: translateX(-50%);
+    background: var(--yellow);
+    color: var(--navy-deep);
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-weight:700;
+    font-size:13px;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 50;
+  }
+  .toast.show{ opacity:1; transform: translateX(-50%) translateY(-6px); }
+
+  /* Totals overlay */
+  .totals-overlay{
+    position:fixed;
+    inset:0;
+    background: rgba(4,12,26,0.97);
+    z-index:40;
+    display:none;
+    flex-direction:column;
+    padding: env(safe-area-inset-top) 12px env(safe-area-inset-bottom);
+  }
+  .totals-overlay.show{ display:flex; }
+  .totals-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 10px 2px;
+  }
+  .totals-head h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:15px; margin:0; color:var(--yellow);
+  }
+  .totals-scroll{ flex:1; overflow:auto; }
+  table.totals-table{ width:100%; border-collapse:collapse; font-size:12px; }
+  .totals-table th, .totals-table td{
+    padding:6px 5px; text-align:center; border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  .totals-table th{ color:var(--sky); font-size:9.5px; letter-spacing:0.4px; text-transform:uppercase; position:sticky; top:0; background:var(--navy-deep); }
+  .totals-table td:first-child, .totals-table th:first-child{ text-align:left; padding-left:6px; }
+  .totals-table tr.hi td{ color:var(--yellow); font-weight:700; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <input class="team-name" id="teamName" value="My Team" />
+    <button class="bar-btn" id="totalsBtn">Totals</button>
+    <button class="bar-btn" id="copyBtn">Copy</button>
+    <button class="bar-btn danger" id="resetBtn">Reset</button>
+    <button class="bar-btn" id="tokenBtn" title="Update sync access token">🔑</button>
+  </div>
+  <div class="scroll-hint">
+    <span id="syncDot" class="sync-dot"></span><span id="syncLabel">Connecting…</span>
+    <span style="margin-left:auto">Swipe stats left for <b>AST / STL</b> →</span>
+  </div>
+
+  <div class="list-wrap" id="listWrap">
+    <div id="playersWrap"></div>
+  </div>
+
+  <div class="totals-overlay" id="totalsOverlay">
+    <div class="totals-head">
+      <h2 id="totalsTitle">Team Totals</h2>
+      <button class="bar-btn" id="closeTotals">Close</button>
+    </div>
+    <div class="totals-scroll">
+      <table class="totals-table" id="totalsTable"></table>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'courtside_stat_tracker_v4';
+  // order + tier reflect how often each stat is touched in a live game;
+  // AST and STL sit last so they scroll off-screen on narrow phones.
+  const STAT_DEFS = [
+    {key:'p2a', label:'2FGA', tier:1, tint:'tint-2pt'},
+    {key:'p2m', label:'2FGM', tier:1, tint:'tint-2pt'},
+    {key:'p3a', label:'3FGA', tier:1, tint:'tint-3pt'},
+    {key:'p3m', label:'3FGM', tier:1, tint:'tint-3pt'},
+    {key:'fta', label:'FTA',  tier:2, tint:'tint-ft'},
+    {key:'ftm', label:'FTM',  tier:2, tint:'tint-ft'},
+    {key:'to',  label:'TO',   tier:1, tint:'tint-to'},
+    {key:'reb', label:'REB',  tier:3, tint:'tint-hustle'},
+    {key:'ast', label:'AST',  tier:3, tint:'tint-hustle'},
+    {key:'stl', label:'STL',  tier:3, tint:'tint-hustle'}
+  ];
+
+  // ---- GitHub-backed live sync (shared across every device that opens this page) ----
+  const GH_OWNER  = 'basketballsims';
+  const GH_REPO   = 'livestats';
+  const GH_PATH   = 'db.json';
+  const GH_BRANCH = 'main';
+  const GH_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`;
+  const TOKEN_KEY = 'courtside_gh_token';
+
+  function getToken(){
+    let t = localStorage.getItem(TOKEN_KEY);
+    if(!t){
+      t = (prompt('Enter the GitHub access token for live sync on this device:') || '').trim();
+      if(t) localStorage.setItem(TOKEN_KEY, t);
+    }
+    return t;
+  }
+  function clearToken(){
+    localStorage.removeItem(TOKEN_KEY);
+  }
+  const POLL_MS = 4000;
+  const SAVE_DEBOUNCE_MS = 900;
+
+  let currentSha = null;   // sha of the last file version we know about
+  let dirty = false;       // true while local edits haven't been pushed yet
+  let saveTimer = null;
+  let pollTimer = null;
+
+  function b64EncodeUnicode(str){
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+      (m, p1) => String.fromCharCode('0x' + p1)));
+  }
+  function b64DecodeUnicode(str){
+    return decodeURIComponent(atob(str.replace(/\n/g,'')).split('').map(c =>
+      '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+  }
+
+  function defaultState(){
+    const players = [];
+    for(let i=1;i<=10;i++){
+      const stats = {};
+      STAT_DEFS.forEach(s => stats[s.key] = 0);
+      players.push({ id:i, number:String(i), name:'Player '+i, stats });
+    }
+    return { teamName:'My Team', players };
+  }
+
+  function migrate(parsed){
+    if(!parsed || !parsed.players || parsed.players.length !== 10) return defaultState();
+    parsed.players.forEach(p=>{
+      STAT_DEFS.forEach(s=>{ if(typeof p.stats[s.key] !== 'number') p.stats[s.key] = 0; });
+    });
+    return parsed;
+  }
+
+  function loadCache(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return null;
+      return migrate(JSON.parse(raw));
+    }catch(e){ return null; }
+  }
+  function cacheLocally(s){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }catch(e){}
+  }
+
+  let state = loadCache() || defaultState();
+
+  function setSyncStatus(mode, text){
+    const dot = document.getElementById('syncDot');
+    const label = document.getElementById('syncLabel');
+    if(!dot || !label) return;
+    dot.className = 'sync-dot' + (mode ? ' ' + mode : '');
+    label.textContent = text;
+  }
+
+  async function ghFetch(){
+    const res = await fetch(`${GH_API}?ref=${GH_BRANCH}&t=${Date.now()}`, {
+      headers: { 'Authorization': 'token ' + getToken(), 'Accept': 'application/vnd.github+json' }
+    });
+    if(res.status === 401){ clearToken(); }
+    if(!res.ok) throw new Error('GitHub GET failed: ' + res.status);
+    const data = await res.json();
+    return { sha: data.sha, json: JSON.parse(b64DecodeUnicode(data.content)) };
+  }
+
+  async function ghPush(newState){
+    // always fetch the latest sha right before writing, per GitHub Contents API requirements
+    const latest = await ghFetch().catch(()=>null);
+    const shaToUse = latest ? latest.sha : currentSha;
+    const body = {
+      message: 'Live stat update ' + new Date().toISOString(),
+      content: b64EncodeUnicode(JSON.stringify(newState)),
+      branch: GH_BRANCH
+    };
+    if(shaToUse) body.sha = shaToUse;
+    const res = await fetch(GH_API, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'token ' + getToken(),
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if(!res.ok) throw new Error('GitHub PUT failed: ' + res.status);
+    const data = await res.json();
+    currentSha = data.content.sha;
+  }
+
+  function scheduleSave(){
+    dirty = true;
+    cacheLocally(state);
+    setSyncStatus('busy', 'Saving…');
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(async ()=>{
+      try{
+        await ghPush(state);
+        dirty = false;
+        setSyncStatus('ok', 'Synced');
+      }catch(e){
+        setSyncStatus('err', 'Save failed — will retry');
+        // retry automatically on the next poll cycle
+      }
+    }, SAVE_DEBOUNCE_MS);
+  }
+  // kept for compatibility with the rest of the app's call sites
+  function save(){ scheduleSave(); }
+
+  async function pollRemote(){
+    if(dirty) return; // don't clobber an in-flight local edit
+    try{
+      const remote = await ghFetch();
+      if(remote.sha !== currentSha){
+        currentSha = remote.sha;
+        state = migrate(remote.json);
+        cacheLocally(state);
+        renderAll();
+      }
+      setSyncStatus('ok', 'Synced');
+    }catch(e){
+      setSyncStatus('err', 'Offline — retrying');
+    }
+  }
+
+  async function initSync(){
+    setSyncStatus('busy', 'Connecting…');
+    try{
+      const remote = await ghFetch();
+      currentSha = remote.sha;
+      state = migrate(remote.json);
+      cacheLocally(state);
+      setSyncStatus('ok', 'Synced');
+    }catch(e){
+      setSyncStatus('err', 'Offline — using local copy');
+    }
+    renderAll();
+    pollTimer = setInterval(pollRemote, POLL_MS);
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.visibilityState === 'visible') pollRemote();
+    });
+  }
+
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(()=> t.classList.remove('show'), 1500);
+  }
+
+  function points(p){ return p.stats.p2m*2 + p.stats.p3m*3 + p.stats.ftm; }
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+  }
+
+  const teamNameEl = document.getElementById('teamName');
+  teamNameEl.value = state.teamName;
+  teamNameEl.addEventListener('input', ()=>{ state.teamName = teamNameEl.value; save(); });
+
+  const playersWrap = document.getElementById('playersWrap');
+
+  function buildPlayerBlock(p, idx){
+    const rowClass = idx % 2 === 0 ? 'row-a' : 'row-b';
+    let statsHtml = '';
+    STAT_DEFS.forEach(d=>{
+      const labelCls = d.key === 'to' ? 'cell-label to-label' : 'cell-label';
+      statsHtml += `
+        <div class="stat-cell ${rowClass} ${d.tint} tier${d.tier}">
+          <div class="${labelCls}">${d.label}</div>
+          <div class="stepper">
+            <button class="minus" data-action="dec" data-id="${p.id}" data-key="${d.key}">−</button>
+            <div class="val" data-value-for="${p.id}-${d.key}">${p.stats[d.key]}</div>
+            <button class="plus" data-action="inc" data-id="${p.id}" data-key="${d.key}">+</button>
+          </div>
+        </div>
+      `;
+    });
+
+    return `
+      <div class="player-block">
+        <div class="name-row">
+          <div class="jersey-badge"><input data-role="number" data-id="${p.id}" value="${escapeHtml(p.number)}" maxlength="2" inputmode="numeric" /></div>
+          <input class="name-input" data-role="name" data-id="${p.id}" value="${escapeHtml(p.name)}" />
+          <div class="pts-tag">
+            <div class="pts-num" data-pts-for="${p.id}">${points(p)}</div>
+            <div class="pts-label">pts</div>
+          </div>
+        </div>
+        <div class="stats-scroll scroll-sync" data-row-for="${p.id}">${statsHtml}</div>
+      </div>
+    `;
+  }
+
+  function renderAll(){
+    playersWrap.innerHTML = state.players.map((p, idx) => buildPlayerBlock(p, idx)).join('');
+    attachHandlers();
+    attachScrollSync();
+  }
+
+  function attachHandlers(){
+    playersWrap.querySelectorAll('[data-action]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = Number(btn.dataset.id);
+        const key = btn.dataset.key;
+        const p = state.players.find(pl => pl.id === id);
+        if(!p) return;
+        if(btn.dataset.action === 'inc'){ p.stats[key] += 1; }
+        else { p.stats[key] = Math.max(0, p.stats[key]-1); }
+        const valEl = playersWrap.querySelector(`[data-value-for="${id}-${key}"]`);
+        if(valEl) valEl.textContent = p.stats[key];
+        const ptsEl = playersWrap.querySelector(`[data-pts-for="${id}"]`);
+        if(ptsEl) ptsEl.textContent = points(p);
+        save();
+      });
+    });
+    playersWrap.querySelectorAll('[data-role="number"]').forEach(inp=>{
+      inp.addEventListener('input', ()=>{
+        const id = Number(inp.dataset.id);
+        const p = state.players.find(pl => pl.id === id);
+        p.number = inp.value.replace(/[^0-9]/g,'').slice(0,2);
+        save();
+      });
+    });
+    playersWrap.querySelectorAll('[data-role="name"]').forEach(inp=>{
+      inp.addEventListener('input', ()=>{
+        const id = Number(inp.dataset.id);
+        const p = state.players.find(pl => pl.id === id);
+        p.name = inp.value;
+        save();
+      });
+    });
+  }
+
+  // keep every player's horizontally-scrolling stat strip in sync with each other
+  function attachScrollSync(){
+    const groups = Array.from(document.querySelectorAll('.scroll-sync'));
+    let locked = false;
+    groups.forEach(el=>{
+      el.addEventListener('scroll', ()=>{
+        if(locked) return;
+        locked = true;
+        const x = el.scrollLeft;
+        groups.forEach(other=>{ if(other !== el) other.scrollLeft = x; });
+        requestAnimationFrame(()=>{ locked = false; });
+      }, { passive:true });
+    });
+  }
+
+  function buildBoxScoreText(){
+    const lines = [];
+    lines.push(state.teamName + ' — Box Score');
+    lines.push('#  NAME            PTS 2FA 2FM 3FA 3FM FTA FTM  TO REB AST STL');
+    state.players.forEach(p=>{
+      const s = p.stats;
+      const pts = points(p);
+      lines.push(
+        `${p.number.padStart(2)} ${p.name.slice(0,15).padEnd(15)} ${String(pts).padStart(3)} ` +
+        `${String(s.p2a).padStart(3)} ${String(s.p2m).padStart(3)} ${String(s.p3a).padStart(3)} ${String(s.p3m).padStart(3)} ` +
+        `${String(s.fta).padStart(3)} ${String(s.ftm).padStart(3)} ${String(s.to).padStart(3)} ${String(s.reb).padStart(3)} ${String(s.ast).padStart(3)} ${String(s.stl).padStart(3)}`
+      );
+    });
+    const totals = {p2a:0,p2m:0,p3a:0,p3m:0,fta:0,ftm:0,to:0,reb:0,ast:0,stl:0};
+    let totalPts = 0;
+    state.players.forEach(p=>{
+      Object.keys(totals).forEach(k => totals[k]+=p.stats[k]);
+      totalPts += points(p);
+    });
+    lines.push('-'.repeat(66));
+    lines.push(
+      `   TEAM            ${String(totalPts).padStart(3)} ` +
+      `${String(totals.p2a).padStart(3)} ${String(totals.p2m).padStart(3)} ${String(totals.p3a).padStart(3)} ${String(totals.p3m).padStart(3)} ` +
+      `${String(totals.fta).padStart(3)} ${String(totals.ftm).padStart(3)} ${String(totals.to).padStart(3)} ${String(totals.reb).padStart(3)} ${String(totals.ast).padStart(3)} ${String(totals.stl).padStart(3)}`
+    );
+    return lines.join('\n');
+  }
+
+  function copyToClipboard(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(()=> showToast('Box score copied')).catch(()=> fallbackCopy(text));
+    } else { fallbackCopy(text); }
+  }
+  function fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); showToast('Box score copied'); }
+    catch(e){ showToast('Copy failed — long-press to select text'); }
+    document.body.removeChild(ta);
+  }
+  document.getElementById('copyBtn').addEventListener('click', ()=> copyToClipboard(buildBoxScoreText()));
+
+  document.getElementById('tokenBtn').addEventListener('click', ()=>{
+    clearToken();
+    getToken();
+    pollRemote();
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', ()=>{
+    if(!confirm('Reset all stats to 0 for this game? Names and numbers stay the same.')) return;
+    state.players.forEach(p=>{ STAT_DEFS.forEach(d => p.stats[d.key] = 0); });
+    save();
+    renderAll();
+    showToast('Game reset');
+  });
+
+  const totalsOverlay = document.getElementById('totalsOverlay');
+  document.getElementById('totalsBtn').addEventListener('click', ()=>{
+    renderTotals();
+    totalsOverlay.classList.add('show');
+  });
+  document.getElementById('closeTotals').addEventListener('click', ()=> totalsOverlay.classList.remove('show'));
+
+  function renderTotals(){
+    document.getElementById('totalsTitle').textContent = state.teamName + ' — Totals';
+    const table = document.getElementById('totalsTable');
+    let html = '<tr><th>#</th><th>Name</th><th>PTS</th><th>2FA</th><th>2FM</th><th>3FA</th><th>3FM</th><th>FTA</th><th>FTM</th><th>TO</th><th>REB</th><th>AST</th><th>STL</th></tr>';
+    const totals = {p2a:0,p2m:0,p3a:0,p3m:0,fta:0,ftm:0,to:0,reb:0,ast:0,stl:0};
+    let totalPts = 0;
+    state.players.forEach(p=>{
+      const s = p.stats;
+      const pts = points(p);
+      totalPts += pts;
+      Object.keys(totals).forEach(k => totals[k]+=s[k]);
+      html += `<tr><td>${p.number}</td><td>${escapeHtml(p.name)}</td><td>${pts}</td><td>${s.p2a}</td><td>${s.p2m}</td><td>${s.p3a}</td><td>${s.p3m}</td><td>${s.fta}</td><td>${s.ftm}</td><td>${s.to}</td><td>${s.reb}</td><td>${s.ast}</td><td>${s.stl}</td></tr>`;
+    });
+    html += `<tr class="hi"><td colspan="2">TEAM</td><td>${totalPts}</td><td>${totals.p2a}</td><td>${totals.p2m}</td><td>${totals.p3a}</td><td>${totals.p3m}</td><td>${totals.fta}</td><td>${totals.ftm}</td><td>${totals.to}</td><td>${totals.reb}</td><td>${totals.ast}</td><td>${totals.stl}</td></tr>`;
+    table.innerHTML = html;
+  }
+
+  renderAll(); // instant paint from local cache while we connect
+  initSync();
+})();
+</script>
+</body>
+</html>
