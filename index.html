@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Courtside — Live Box Score (Synced)</title>
+<title>Courtside — Live Box Score</title>
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD+UlEQVR4nO3dQU4bQRBG4SFiEYkTZMM5OEyOx924AsssRrJGkAc2dnf91X7fMijEXXnUGIsxD0/PL5v0P7+qH4ByGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIPVY/gDJvr+8f/uTP39/00eOH7se9xPE5hSv/+j3ksngcVzZxzmdeuJIF4xgXxLf/3GKhLBXH5CzoASyTyCJxlGdxtEwi7eOIyuJogUQaxxGbxVHrRFrG0SKLo6aJNIujXRZH7RLp9PJ56zJOGp2iTRyNZvqtLmdpcFnpMsqLtLjEpG+OJcs4CT9ddBzhs7uJ5DPmxpE8tduKPWloHLHzGiTzvIlxZE5qtMBTx8UROKNp0s6eFUfadOaLmkBQHFFzKZQzh5Q4ciaSIGQaEXGEzCJKwkwi4lCm+jgSvkQylU+mOI7y84ernU9lHJZxjsIp1V9WFKssDtfG+apm5eYQqonDtXGpkom5OYQK4nBt/Mz8ubk5hGbH4dq4xuTpuTmEpsbh2rjezBm6ORobHcrYO95cFSMcp/r2+j7utjk3h5BxCA2Mw2vKHOPm7OYQMg4h4xAaFYdPOGYaNG03h5BxCBmHkHEIGYfQkDj8VmW+ETN3cwgZh5BxCBmHkHEIPTw9v1Q/BoVycwgZh5BxCA25NaHpK6THn/HveISb36Pg5hAyDiHjEDIOoSFxhP/SwyWNmLmbQ8g4hIxDyDiEjENoVBx+wzLToGm7OYSMQ8g4hAbG4dOOOXw3QRUwDqGxb1L7YeN1/PGqQKepDn2H2s3N0droZ3VT4/Ap6vVmztDNITQ7DpfHNSZPz80hVBCHy+Nn5s/NzSFUE4fL41IlE3NzCJXF4fI4X9Ws3BxClXG4PM5ROKXizWEfX6udT/1lxT5I+WTq41CsiDjKv0QCJcwkIo4tYxY5QqaREscWM5FyOXMIimNLmkuVqAlkxbGFTWeytLPHxbHlzWiOwFMnxrFFTmqozPOGxrGlzmuE2JPmxrEFT+2Gks8YHceWPbvrhZ9u7B1vN7FPcLG75cKz2KVvjpMW0zxTl7O0iWPrM9OvNTpFg8vKUetLTKMsds3i2LVLpF0Wu5Zx7Fok0jSLXeM4drGJtM5i1z6OXVQiC2SxWySOXXkiy2SxWyqO3eTf47dYEEcLxnF0fPusQZ95YYvHcfL5//KiXO4hhc/8XfZCnV4+12TGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiH0D6S6BEvFZYTqAAAAAElFTkSuQmCC">
 <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAD+UlEQVR4nO3dQU4bQRBG4SFiEYkTZMM5OEyOx924AsssRrJGkAc2dnf91X7fMijEXXnUGIsxD0/PL5v0P7+qH4ByGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIGYeQcQgZh5BxCBmHkHEIPVY/gDJvr+8f/uTP39/00eOH7se9xPE5hSv/+j3ksngcVzZxzmdeuJIF4xgXxLf/3GKhLBXH5CzoASyTyCJxlGdxtEwi7eOIyuJogUQaxxGbxVHrRFrG0SKLo6aJNIujXRZH7RLp9PJ56zJOGp2iTRyNZvqtLmdpcFnpMsqLtLjEpG+OJcs4CT9ddBzhs7uJ5DPmxpE8tduKPWloHLHzGiTzvIlxZE5qtMBTx8UROKNp0s6eFUfadOaLmkBQHFFzKZQzh5Q4ciaSIGQaEXGEzCJKwkwi4lCm+jgSvkQylU+mOI7y84ernU9lHJZxjsIp1V9WFKssDtfG+apm5eYQqonDtXGpkom5OYQK4nBt/Mz8ubk5hGbH4dq4xuTpuTmEpsbh2rjezBm6ORobHcrYO95cFSMcp/r2+j7utjk3h5BxCA2Mw2vKHOPm7OYQMg4h4xAaFYdPOGYaNG03h5BxCBmHkHEIGYfQkDj8VmW+ETN3cwgZh5BxCBmHkHEIPTw9v1Q/BoVycwgZh5BxCA25NaHpK6THn/HveISb36Pg5hAyDiHjEDIOoSFxhP/SwyWNmLmbQ8g4hIxDyDiEjENoVBx+wzLToGm7OYSMQ8g4hAbG4dOOOXw3QRUwDqGxb1L7YeN1/PGqQKepDn2H2s3N0droZ3VT4/Ap6vVmztDNITQ7DpfHNSZPz80hVBCHy+Nn5s/NzSFUE4fL41IlE3NzCJXF4fI4X9Ws3BxClXG4PM5ROKXizWEfX6udT/1lxT5I+WTq41CsiDjKv0QCJcwkIo4tYxY5QqaREscWM5FyOXMIimNLmkuVqAlkxbGFTWeytLPHxbHlzWiOwFMnxrFFTmqozPOGxrGlzmuE2JPmxrEFT+2Gks8YHceWPbvrhZ9u7B1vN7FPcLG75cKz2KVvjpMW0zxTl7O0iWPrM9OvNTpFg8vKUetLTKMsds3i2LVLpF0Wu5Zx7Fok0jSLXeM4drGJtM5i1z6OXVQiC2SxWySOXXkiy2SxWyqO3eTf47dYEEcLxnF0fPusQZ95YYvHcfL5//KiXO4hhc/8XfZCnV4+12TGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiFkHELGIWQcQsYhZBxCxiH0D6S6BEvFZYTqAAAAAElFTkSuQmCC">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -95,16 +95,6 @@
     flex-shrink:0;
   }
   .scroll-hint b{ color: var(--sky); }
-  .sync-dot{
-    width:7px; height:7px;
-    border-radius:50%;
-    background: var(--chalk-dim);
-    flex-shrink:0;
-    transition: background 0.2s ease;
-  }
-  .sync-dot.ok{ background:#5FD07A; }
-  .sync-dot.busy{ background: var(--yellow); }
-  .sync-dot.err{ background: var(--danger); }
 
   /* List */
   .list-wrap{
@@ -385,13 +375,9 @@
     <button class="bar-btn" id="totalsBtn">Totals</button>
     <button class="bar-btn" id="copyBtn">Copy</button>
     <button class="bar-btn danger" id="resetBtn">Reset</button>
-    <button class="bar-btn" id="tokenBtn" title="Update sync access token">🔑</button>
     <button class="bar-btn primary" id="exportBtn">Export</button>
   </div>
-  <div class="scroll-hint">
-    <span id="syncDot" class="sync-dot"></span><span id="syncLabel">Connecting…</span>
-    <span style="margin-left:auto">Swipe stats left for <b>AST / STL</b> →</span>
-  </div>
+  <div class="scroll-hint">Swipe stats left for <b>AST / STL</b> →</div>
 
   <div class="list-wrap" id="listWrap">
     <div id="playersWrap"></div>
@@ -457,42 +443,6 @@
     {key:'stl', label:'STL',  tier:3, tint:'tint-hustle'}
   ];
 
-  // ---- GitHub-backed live sync (shared across every device that opens this page) ----
-  const GH_OWNER  = 'basketballsims';
-  const GH_REPO   = 'livestats';
-  const GH_PATH   = 'db.json';
-  const GH_BRANCH = 'main';
-  const GH_API = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH}`;
-  const TOKEN_KEY = 'courtside_gh_token';
-
-  function getToken(){
-    let t = localStorage.getItem(TOKEN_KEY);
-    if(!t){
-      t = (prompt('Enter the GitHub access token for live sync on this device:') || '').trim();
-      if(t) localStorage.setItem(TOKEN_KEY, t);
-    }
-    return t;
-  }
-  function clearToken(){
-    localStorage.removeItem(TOKEN_KEY);
-  }
-  const POLL_MS = 4000;
-  const SAVE_DEBOUNCE_MS = 900;
-
-  let currentSha = null;   // sha of the last file version we know about
-  let dirty = false;       // true while local edits haven't been pushed yet
-  let saveTimer = null;
-  let pollTimer = null;
-
-  function b64EncodeUnicode(str){
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-      (m, p1) => String.fromCharCode('0x' + p1)));
-  }
-  function b64DecodeUnicode(str){
-    return decodeURIComponent(atob(str.replace(/\n/g,'')).split('').map(c =>
-      '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
-  }
-
   function defaultState(){
     const players = [];
     for(let i=1;i<=10;i++){
@@ -511,112 +461,19 @@
     return parsed;
   }
 
-  function loadCache(){
+  function load(){
     try{
       const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return null;
+      if(!raw) return defaultState();
       return migrate(JSON.parse(raw));
-    }catch(e){ return null; }
-  }
-  function cacheLocally(s){
-    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }catch(e){}
+    }catch(e){ return defaultState(); }
   }
 
-  let state = loadCache() || defaultState();
+  let state = load();
 
-  function setSyncStatus(mode, text){
-    const dot = document.getElementById('syncDot');
-    const label = document.getElementById('syncLabel');
-    if(!dot || !label) return;
-    dot.className = 'sync-dot' + (mode ? ' ' + mode : '');
-    label.textContent = text;
-  }
-
-  async function ghFetch(){
-    const res = await fetch(`${GH_API}?ref=${GH_BRANCH}&t=${Date.now()}`, {
-      headers: { 'Authorization': 'token ' + getToken(), 'Accept': 'application/vnd.github+json' }
-    });
-    if(res.status === 401){ clearToken(); }
-    if(!res.ok) throw new Error('GitHub GET failed: ' + res.status);
-    const data = await res.json();
-    return { sha: data.sha, json: JSON.parse(b64DecodeUnicode(data.content)) };
-  }
-
-  async function ghPush(newState){
-    // always fetch the latest sha right before writing, per GitHub Contents API requirements
-    const latest = await ghFetch().catch(()=>null);
-    const shaToUse = latest ? latest.sha : currentSha;
-    const body = {
-      message: 'Live stat update ' + new Date().toISOString(),
-      content: b64EncodeUnicode(JSON.stringify(newState)),
-      branch: GH_BRANCH
-    };
-    if(shaToUse) body.sha = shaToUse;
-    const res = await fetch(GH_API, {
-      method: 'PUT',
-      headers: {
-        'Authorization': 'token ' + getToken(),
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-    if(!res.ok) throw new Error('GitHub PUT failed: ' + res.status);
-    const data = await res.json();
-    currentSha = data.content.sha;
-  }
-
-  function scheduleSave(){
-    dirty = true;
-    cacheLocally(state);
-    setSyncStatus('busy', 'Saving…');
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(async ()=>{
-      try{
-        await ghPush(state);
-        dirty = false;
-        setSyncStatus('ok', 'Synced');
-      }catch(e){
-        setSyncStatus('err', 'Save failed — will retry');
-        // retry automatically on the next poll cycle
-      }
-    }, SAVE_DEBOUNCE_MS);
-  }
-  // kept for compatibility with the rest of the app's call sites
-  function save(){ scheduleSave(); }
-
-  async function pollRemote(){
-    if(dirty) return; // don't clobber an in-flight local edit
-    try{
-      const remote = await ghFetch();
-      if(remote.sha !== currentSha){
-        currentSha = remote.sha;
-        state = migrate(remote.json);
-        cacheLocally(state);
-        renderAll();
-      }
-      setSyncStatus('ok', 'Synced');
-    }catch(e){
-      setSyncStatus('err', 'Offline — retrying');
-    }
-  }
-
-  async function initSync(){
-    setSyncStatus('busy', 'Connecting…');
-    try{
-      const remote = await ghFetch();
-      currentSha = remote.sha;
-      state = migrate(remote.json);
-      cacheLocally(state);
-      setSyncStatus('ok', 'Synced');
-    }catch(e){
-      setSyncStatus('err', 'Offline — using local copy');
-    }
-    renderAll();
-    pollTimer = setInterval(pollRemote, POLL_MS);
-    document.addEventListener('visibilitychange', ()=>{
-      if(document.visibilityState === 'visible') pollRemote();
-    });
+  function save(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch(e){ showToast('Storage unavailable — changes may not persist'); }
   }
 
   function showToast(msg){
@@ -836,12 +693,6 @@
     showToast('Opening Mail app…');
   });
 
-  document.getElementById('tokenBtn').addEventListener('click', ()=>{
-    clearToken();
-    getToken();
-    pollRemote();
-  });
-
   document.getElementById('resetBtn').addEventListener('click', ()=>{
     if(!confirm('Reset all stats to 0 for this game? Names and numbers stay the same.')) return;
     state.players.forEach(p=>{ STAT_DEFS.forEach(d => p.stats[d.key] = 0); });
@@ -874,8 +725,7 @@
     table.innerHTML = html;
   }
 
-  renderAll(); // instant paint from local cache while we connect
-  initSync();
+  renderAll();
 })();
 </script>
 </body>
